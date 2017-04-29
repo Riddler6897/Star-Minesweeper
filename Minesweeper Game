@@ -6,9 +6,27 @@
 ##########################################################################################################################################
 ##########################################################################################################################################
 from Tkinter import *
-import random
 
-class Minesweeper(Frame):
+class Minesweeper:
 
-  def __init__(self, master):
-  
+    def __init__(self, master):
+
+        self.PlainTile = PhotoImage(file = "images/plaintile.gif")
+        self.ClickedTile = PhotoImage(file = "images/clickedtile.gif")
+        self.MineTile = PhotoImage(file = "images/minetile.gif")
+        self.FlagTile = PhotoImage(file = "images/flagtile.gif")
+        self.NoTile = []
+        for x in range (1,9):
+            self.NoTile.append(PhotoImage(file = "images/tile_"+str(x)+".gif"))
+
+        frame = Frame(master)
+        frame.pack()
+
+        self.label1 = Label(frame, text = "Minesweeper")
+        self.label1.grid(row = 0, column = 0, columnspan = 15)
+
+        self.flags = 0
+        self.correctFlags = 0
+        self.clicked = 0
+
+        self.button
