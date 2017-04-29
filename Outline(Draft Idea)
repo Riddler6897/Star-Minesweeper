@@ -1,0 +1,29 @@
+from import Tkinter or from pygame
+from time 
+
+
+class Minesweeper(): #either we use Tkinter or pygame
+
+  def play(): #play function for each grid
+  
+  def lose(): #lose function if they hit a mine(restarts lvl)
+  
+  def score(): #keeps up with how many tiles are left(might add a game score???)
+  
+  def plot(): #plotting the points for each mine for the desair constellation
+  
+  def (constellation)(): # which constellation is running
+    def play():
+      def plot():
+      def score():
+      def lose():
+      
+  def image(): #function to show images 
+    #ideas like finished the lvl shows the constellation image
+    #shows flag image 
+    
+ def times_out(): #timer
+   timer
+   
+#Just a draft Brad and I came up with last night to organized our ideas.......just a draft so will be updated and improved
+#as we move along...
