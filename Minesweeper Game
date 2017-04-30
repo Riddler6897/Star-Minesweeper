@@ -5,9 +5,12 @@
 # Description:
 ##########################################################################################################################################
 ##########################################################################################################################################
-from Tkinter import *
+from Tkinter import * #We could also use pygame#
+from time import time #To set a timer#
+from time import sleep #To make the RGBs turn on and off#
+import RPi.GPIO as GPIO 
 
-class Minesweeper:
+class Minesweeper():
 
     def __init__(self, master):
 
@@ -22,7 +25,7 @@ class Minesweeper:
         frame = Frame(master)
         frame.pack()
 
-        self.label1 = Label(frame, text = "Minesweeper")
+        self.label1 = Label(frame, text = "Constellation Minesweeper")
         self.label1.grid(row = 0, column = 0, columnspan = 15)
 
         self.flags = 0
@@ -30,3 +33,31 @@ class Minesweeper:
         self.clicked = 0
 
         self.button
+        
+    def play(): #Will actually run the game#
+        pass
+        
+    def lose(): #Will use GPIO for RGBs and allow the player to start the same level over#
+        pass
+        
+    def score(): #How many non-mine tiles are left to uncover. Could also use GUI to display score for completed levels#
+        pass
+        
+    def plot(): #Plots desired constellations#
+        pass
+        
+    def constellation(): #Which constellation is running#
+        pass
+        def play():
+        def plot():
+        def score():
+        def lose():
+        
+    def image(): #actually shows the images. Could show image of constellation. Could show flag image#
+        pass
+    
+    def time_out(): #timer. When the time goes out, the whole program will stop running while still showing score.#
+        pass
+        
+    def sound(): #To play a sound if they win or lose. Can be put under the lose function#
+        pass
