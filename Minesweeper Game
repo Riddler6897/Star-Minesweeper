@@ -20,10 +20,12 @@ class Minesweeper():
         self.ClickedTile = PhotoImage(file = "images/clickedtile.gif")
         self.MineTile = PhotoImage(file = "images/minetile.gif")
         self.FlagTile = PhotoImage(file = "images/flagtile.gif")
-        self.NumberTile = []
+       # This will create an array of number tiles used as flags 
+       self.NumberTile = []
         for x in range (1,9):
             self.NumberTile.append(PhotoImage(file = "images/tile_"+str(x)+".gif"))
-
+        
+        # Creates the frame 
         frame = Frame(master)
         frame.pack()
         
@@ -66,3 +68,8 @@ class Minesweeper():
         
     def sound(): #To play a sound if they win or lose. Can be put under the lose function#
         pass
+
+window = Tk()
+window.title("Minesweeper")
+minesweeper = Minesweeper(window)
+window.mainloop()
