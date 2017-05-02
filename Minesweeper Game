@@ -11,7 +11,7 @@ from time import time #To set a timer#
 from time import sleep #To make the RGBs turn on and off#
 import RPi.GPIO as GPIO 
 
-class Minesweeper():
+class Minesweeper(Frame):
 
     def __init__(self, master):
 
@@ -21,17 +21,20 @@ class Minesweeper():
         self.MineTile = PhotoImage(file = "images/minetile.gif")
         self.FlagTile = PhotoImage(file = "images/flagtile.gif")
        # This will create an array of number tiles used as flags 
-       self.NumberTile = []
+        self.NumberTile = []
+        Frame.__init__(self, master)
+        self.master = master
+        
         for x in range (1,9):
             self.NumberTile.append(PhotoImage(file = "images/tile_"+str(x)+".gif"))
         
-        # Creates the frame 
-        frame = Frame(master)
-        frame.pack()
+        # Not sure we need these two lines#
+        #frame = Frame(master)
+        #frame.pack()
         
-        # Simply creates a title for the frame
-        self.label1 = Label(frame, text = "Constellation Minesweeper")
-        self.label1.grid(row = 0, column = 0, columnspan = 15)
+        # Not sure we need the following two lines#
+        #self.label1 = Label(frame, text = "Constellation Minesweeper")
+        #self.label1.grid(row = 0, column = 0, columnspan = 15)
 
         # Variables for the flags and tiles 
         self.flags = 0
@@ -39,8 +42,17 @@ class Minesweeper():
         self.clicked = 0
 
         # Creating the buttons 
-        self.button
+        #self.button
         
+    #Will make the grid   
+    def grid(self): 
+        img = PhotoImage(file="images/plaintile.gif")
+        for r in range(15):
+            for c in range(15):
+            Grid = Button(self.master, image=img)
+            Grid.image = img
+            Grid.grid(row=r, column=c)
+            
     def play(): #Will actually run the game#
         pass
         
@@ -72,4 +84,5 @@ class Minesweeper():
 window = Tk()
 window.title("Minesweeper")
 minesweeper = Minesweeper(window)
+minesweeper.grid()
 window.mainloop()
