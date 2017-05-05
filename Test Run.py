@@ -12,22 +12,15 @@ class Minesweeper(Frame):
                        PhotoImage(file = "images/minetile.gif"),
                        PhotoImage(file = "images/flagtile.gif")]
         self.NoTile = []
-        Frame.__init__(self, master)
+        #Frame.__init__(self, master)
         self.master = master
         
         for x in range (1,9):
             self.NoTile.append(PhotoImage(file = "images/tile_"+str(x)+".gif"))
 
-        self.label1 = Label(master, text = "Constellation Minesweeper") #Not sure we need this#
-        self.label1.grid(row = 0, column = 0, columnspan = 15) #Or this#
-
-        self.flags = 0
-        self.correctFlags = 0
-        self.clicked = 0
-
         self.button = []
 
-        self.constellation = []
+
 
         self.Libra = [23, 63, 102, 124, 154, 161, 197, 209]
         self.Orion = [0, 2, 16, 30, 62, 66, 73, 89, 93, 103, 113, 118, 125, 132, 139, 146, 153, 211, 217]
@@ -39,10 +32,11 @@ class Minesweeper(Frame):
         self.Chameleon = [66, 104, 106, 133, 140]
         self.Crater = [4, 22, 98, 120, 142, 153, 164, 220]
         self.Vulpecula = [2, 51, 61, 83, 114, 145, 178, 209]
-        self.levels = [CanesVenatici, Chameleon, Libra, Crater, Vulpecula, Phoenix, CanisMajor, Taurus, Draco, Orion]
+        self.levels = [self.CanesVenatici, self.Chameleon, self.Libra, self.Crater, self.Vulpecula, self.Phoenix, self.CanisMajor, self.Taurus, self.Draco, self.Orion]
 
-        self.level = 0
-
+        self.level = 5
+        self.label1 = Label(master, text = "Mines: "+str(len(self.levels[self.level])))
+        self.label1.grid(row = 16, column = 0, columnspan = 15)
 
     def buttonPressed(self, i):
         self.button[i].config(image = self.images[1])
@@ -51,9 +45,8 @@ class Minesweeper(Frame):
         self.button[i].config(image=self.images[2])
 
     def constellation_plot(self):
-        if self.level==0:
-            for i in self.Canus:
-                self.button[i].config(command = lambda i=i: self.minePressed(i))
+        for i in self.levels[self.level]:
+            self.button[i].config(command = lambda i=i: self.minePressed(i))
 
        
     def grid(self): #This will make the grid#
