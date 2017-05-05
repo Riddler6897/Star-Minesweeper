@@ -29,7 +29,17 @@ class Minesweeper(Frame):
 
         self.constellation = []
 
-        self.Canus = [42, 182]
+        self.Libra = [23, 63, 102, 124, 154, 161, 197, 209]
+        self.Orion = [0, 2, 16, 30, 62, 66, 73, 89, 93, 103, 113, 118, 125, 132, 139, 146, 153, 211, 217]
+        self.Phoenix = [22, 44, 45, 78, 85, 121, 148, 169, 203]
+        self.Taurus = [3, 30, 35, 64, 67, 83, 95, 99, 113, 129, 146, 163, 178, 204, 223]
+        self.CanisMajor = [21, 49, 69, 73, 81, 101, 140, 144, 186, 197, 203, 212]
+        self.Draco = [32, 51, 63, 67, 96, 127, 157, 161, 167, 173, 193, 195, 198, 212, 224]
+        self.CanesVenatici = [43, 182]
+        self.Chameleon = [66, 104, 106, 133, 140]
+        self.Crater = [4, 22, 98, 120, 142, 153, 164, 220]
+        self.Vulpecula = [2, 51, 61, 83, 114, 145, 178, 209]
+        self.levels = [CanesVenatici, Chameleon, Libra, Crater, Vulpecula, Phoenix, CanisMajor, Taurus, Draco, Orion]
 
         self.level = 0
 
