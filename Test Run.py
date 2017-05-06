@@ -12,7 +12,7 @@ class Minesweeper(Frame):
                        PhotoImage(file = "images/minetile.gif"),
                        PhotoImage(file = "images/flagtile.gif")]
         self.NoTile = []
-        #Frame.__init__(self, master)
+        Frame.__init__(self, master)
         self.master = master
 #populates NoTile with images corresponding to the number of mines adjacent to each tile
         for x in range (1,9):
@@ -34,15 +34,24 @@ class Minesweeper(Frame):
 #an array containing all the constellations in order of "difficulty"
         self.level = 0
         self.score = 0
+        self.pressed = 0
+        self.tiles = 225-len(self.levels[self.level])
 #labels showing the current level and the number of mines in the level        
         self.label1 = Label(master, text = "Mines: "+str(len(self.levels[self.level])))
         self.label1.grid(row = 16, column = 0, columnspan = 5)
         self.label2 = Label(master, text = "Level: "+ str(self.score))
         self.label2.grid(row = 16, column = 5, columnspan = 5)
-        
+        self.label3 = Label(master, text = "Tiles Left: "+str(self.pressed))
+        self.label3.grid(row = 16, column = 10, columnspan = 5)
 
     def buttonPressed(self, i):
-        self.button[i].config(image = self.images[1])
+        self.pressed +=1
+        self.tiles -= 1
+        self.label3 = Label(self.master, text = "Tiles Left: "+str(self.tiles))
+        self.label3.grid(row = 16, column = 10, columnspan = 5)
+        self.button[i].config(image = self.images[1], state=DISABLED)
+        if self.tiles == 0:
+            self.win()
 
     def minePressed(self, i):
         self.button[i].config(image=self.images[2])
@@ -51,7 +60,17 @@ class Minesweeper(Frame):
         for i in self.levels[self.level]:
             self.button[i].config(command = lambda i=i: self.minePressed(i))
 
-       
+     def win(self):
+        Minesweeper(window).grid()
+        self.level += 1
+        self.label1 = Label(self.master, text = "Mines: "+str(len(self.levels[self.level])))
+        self.label1.grid(row = 16, column = 0, columnspan = 5)
+        self.score += 1
+        self.label2 = Label(self.master, text = "Level: "+ str(self.score))
+        self.label2.grid(row = 16, column = 5, columnspan = 5)
+        self.pressed = 0
+        self.tiles = 225-len(self.levels[self.level])  
+        
     def grid(self): #This will make the grid#
         i = 0
         for r in range(15):
