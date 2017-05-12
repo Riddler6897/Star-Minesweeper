@@ -11,6 +11,7 @@ from Tkinter import *
 from time import time #To set a timer
 from time import sleep #To make the RGBs turn on and off
 #import RPi.GPIO as GPIO
+import tkMessageBox
 
 class Minesweeper(Frame):
 
@@ -43,13 +44,15 @@ class Minesweeper(Frame):
         self.Chameleon = [66, 104, 106, 133, 140]
         self.Crater = [4, 22, 98, 120, 142, 153, 164, 220]
         self.Vulpecula = [2, 51, 61, 83, 114, 145, 178, 209]
+        
         #an array containing all the constellations in order of "difficulty"
-        self.levels = [self.CanesVenatici, self.Chameleon, self.Libra, self.Crater, self.Vulpecula, self.Phoenix, self.CanisMajor, self.Taurus, self.Draco, self.Orion]
+        self.levels = [self.CanesVenatici, self.Chameleon, self.Libra, self.Crater, self.Vulpecula,
+                       self.Phoenix, self.CanisMajor, self.Taurus, self.Draco, self.Orion]
 
         # variables for the scoring system
         self.level = 0
         self.score = 1
-        self.pressed = 0
+        self.pressed = 223
         self.tiles = 225-len(self.levels[self.level])
 
         #labels showing the current level and the number of mines in the level        
@@ -74,7 +77,7 @@ class Minesweeper(Frame):
     # Makes you lose if you press a mine 
     def minePressed(self, i):
         self.button[i].config(image=self.images[2])
-        #self.lose()
+        self.lose()
 
     # Tells the user whether the block clicked is a mine or not by calling the mine Pressedfunction
     def constellation_plot(self):
@@ -90,6 +93,8 @@ class Minesweeper(Frame):
 
     # A function to move user to next level once all tiles are found without clicking on a mine
     def win(self):
+        if self.level == 9:
+            tkMessageBox.showinfo("Winner!", "You won the game!")
         self.grid_forget()
         self.score += 1
         self.level += 1
@@ -119,10 +124,23 @@ class Minesweeper(Frame):
 
        
         
-    #def lose(self): #Will use GPIO for RGBs and allow the player to start the same level over#
-        #quit(1)
+    def lose(self): #Will use GPIO for RGBs and allow the player to start the same level over#
+        tkMessageBox.showinfo("Loser!", "You hit a mine! Press 'OK' to restart the level!" )
         
-
+        sleep(.5)
+        
+        self.grid_forget()
+        self.score = self.score
+        self.level = self.level
+        self.pressed = 0
+        self.tiles = 225-len(self.levels[self.level])
+        self.label1 = Label(self.master, text = "Mines: "+str(len(self.levels[self.level])))
+        self.label1.grid(row = 16, column = 0, columnspan = 5)
+        self.label2 = Label(self.master, text = "Level: "+ str(self.score))
+        self.label2.grid(row = 16, column = 5, columnspan = 5)
+        self.label3 = Label(self.master, text = "Tiles Left: "+str(self.pressed))
+        self.label3.grid(row = 16, column = 10, columnspan = 5)
+        self.grid()
 
 class Timer(Canvas):
     def __init__(self):
@@ -140,12 +158,11 @@ class Timer(Canvas):
         # the previous number using delete(ALL)
         self.delete(ALL)
         self.time -= 1
-        # You can place the time wherever in the canvas
-        # (I chose 10,10 for the example)
         self.create_text(200, 10, text=self.time)
         if self.time == 0:
-            pass
-            # write funciton here to stop game
+            tkMessageBox.showinfo("Time's Up!", "You ran out of time!")
+            window.destroy()
+            self.window.destroy()
         else:
             self.after(1000, self.tick)
     
