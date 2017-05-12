@@ -65,7 +65,7 @@ class Minesweeper(Frame):
         self.label3 = Label(self.master, text = "Tiles Left: "+str(self.tiles))
         self.label3.grid(row = 16, column = 10, columnspan = 5)
         self.button[i].config(image = self.images[1], state=DISABLED)
-        if self.tiles == 200:
+        if self.tiles == 0:
             self.win()
 
     # Makes you lose if you press a mine 
